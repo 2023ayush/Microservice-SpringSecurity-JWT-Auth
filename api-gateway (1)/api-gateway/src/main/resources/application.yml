@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      routes:
+        - id: auth-service-app
+          uri: lb://AUTH-SERVICE
+          predicates:
+            - Path=/auth/**
+          filters:
+            - RewritePath=/auth/(?<segment>.*), /${segment}
+
+        - id: userservice-api-1
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/micro1/**
+          filters:
+            - RewritePath=/micro1/(?<segment>.*), /${segment}
+
+server:
+  port: 5555
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+  instance:
+    prefer-ip-address: true
