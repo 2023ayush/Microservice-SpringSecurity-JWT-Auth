@@ -8,22 +8,27 @@ auth-service/             # Authentication service (Login/Register)
 user-service/             # User microservice (secured)
 service-registry/         # Eureka Server for service discovery
 
-🚀 Tech Stack
-Java 17+
-Spring Boot
-Spring Cloud
-Spring Security + JWT
-Eureka Discovery Server
-Spring Cloud Gateway
-Maven
-Postman / Swagger for API testing
+## 🛠️ Tech Stack
 
-⚙️ Services Overview
-Service	            Port	            Description
-Eureka Registry	   8761	              Service Discovery Server
-Auth Service	     8081	             Login / Register APIs
-User Service	     8082	             User APIs (secured with JWT)
-API Gateway	       8080	             Routes requests + security layer
+- **Java 17+**
+- **Spring Boot**
+- **Spring Cloud**
+- **Spring Security** with **JWT Authentication**
+- **Eureka Discovery Server**
+- **Spring Cloud Gateway**
+- **Maven** for project build and dependency management
+- **Postman** / **Swagger** for API testing and documentation
+
+
+## ⚙️ Services Overview
+
+| Service         | Port | Description                        |
+|-----------------|------|------------------------------------|
+| Eureka Registry | 8761 | Service Discovery Server           |
+| Auth Service    | 8081 | Login / Register APIs              |
+| User Service    | 8082 | User APIs (secured with JWT)       |
+| API Gateway     | 8080 | Routes requests + Security Layer   |
+
 
 
 🔐 Authentication Flow
