@@ -43,11 +43,18 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
 
         userRepository.save(user);
+        // ✅ Make message dynamic based on role
+        String role = dto.getRole();
+        String roleMessage = "User is registered";
+
+        if ("ROLE_ADMIN".equalsIgnoreCase(role)) {
+            roleMessage = "Admin is registered";
+        }
 
         APIResponse<String> response = new APIResponse<>();
         response.setMessage("Registration Done");
         response.setStatus(201);
-        response.setData("User is registered");
+        response.setData(roleMessage);
 
         return response;
 

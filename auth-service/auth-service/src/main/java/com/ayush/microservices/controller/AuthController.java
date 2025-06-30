@@ -37,7 +37,9 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<APIResponse<String>> register(@RequestBody UserDto dto) {
-        dto.setRole("ROLE_ADMIN");
+       // dto.setRole("ROLE_ADMIN");
+
+
         APIResponse<String> response = authService.register(dto);
         return new ResponseEntity<>(response, HttpStatusCode.valueOf(response.getStatus()));
     }

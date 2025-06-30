@@ -11,7 +11,7 @@ public class WelcomeController {
 
     @GetMapping("/welcome")
     public String welcomeAdmin() {
-        return "Welcome admin";
+        return "Welcome";
     }
 
 }

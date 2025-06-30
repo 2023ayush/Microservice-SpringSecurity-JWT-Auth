@@ -1,0 +1,39 @@
+version: '3'
+services:
+  service-registry:
+    build: ./service-registry
+    ports:
+      - "8761:8761"
+    networks:
+      - app-network
+
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "5555:5555"
+    depends_on:
+      - service-registry
+    networks:
+      - app-network
+
+  auth-service:
+    build: ./auth-service
+    ports:
+      - "1122:1122"
+    depends_on:
+      - service-registry
+    networks:
+      - app-network
+
+  user-service:
+    build: ./user-service
+    ports:
+      - "8081:8081"
+    depends_on:
+      - service-registry
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
