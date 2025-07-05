@@ -35,9 +35,9 @@ All services are containerized using Docker and orchestrated with Docker Compose
 | Service           | Port | Description                      |
 |-------------------|------|----------------------------------|
 | Eureka Registry   | 8761 | Service Discovery Server         |
-| Auth Service      | 8081 | Handles login & registration     |
-| User Service      | 8082 | JWT-secured user endpoints       |
-| API Gateway       | 8080 | Routes & secures all API traffic |
+| Auth Service      | 1122 | Handles login & registration     |
+| User Service      | 8081 | JWT-secured user endpoints       |
+| API Gateway       | 5555 | Routes & secures all API traffic |
 
 ---
 
