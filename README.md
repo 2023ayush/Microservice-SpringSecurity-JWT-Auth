@@ -60,8 +60,11 @@ All services are containerized and deployed using Docker Compose.
 ✅ Docker images are available on Docker Hub:  
 👉 [View Docker Hub Repositories](https://hub.docker.com/repositories/ayush4857)
 
+
 📬 API Documentation
+
 👉 [View Full Postman API Docs](https://documenter.getpostman.com/view/33677881/2sB34cnhJa)
+
 
 ✅ Usage Summary
 Register/Login using auth-service via API Gateway
