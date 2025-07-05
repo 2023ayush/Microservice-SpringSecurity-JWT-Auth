@@ -1,47 +1,75 @@
-# Microservice Spring Security Project
+# 🛡️ Microservice Spring Security Project
 
-This project demonstrates a **Spring Boot Microservices Architecture** with **Spring Security**, **JWT Authentication**, **Eureka Service Registry**, and **API Gateway**.
+This project demonstrates a **Spring Boot Microservices Architecture** with **Spring Security**, **JWT Authentication**, **Eureka Service Registry**, and an **API Gateway**.  
+All services are containerized using Docker and orchestrated with Docker Compose.
+
+---
 
 ## 🏗️ Project Structure
-api-gateway/              # Spring Cloud Gateway with JWT security
-auth-service/             # Authentication service (Login/Register)
-user-service/             # User microservice (secured)
-service-registry/         # Eureka Server for service discovery
+
+| Module           | Description                                  |
+|------------------|----------------------------------------------|
+| `api-gateway/`   | Spring Cloud Gateway with JWT authentication |
+| `auth-service/`  | Auth microservice – Login / Register endpoints |
+| `user-service/`  | Protected User APIs (JWT secured)             |
+| `service-registry/` | Eureka Server for service discovery       |
+
+---
 
 ## 🛠️ Tech Stack
 
-- **Java 17+**
-- **Spring Boot**
-- **Spring Cloud**
-- **Spring Security** with **JWT Authentication**
-- **Eureka Discovery Server**
-- **Spring Cloud Gateway**
-- **Maven** for project build and dependency management
-- **Postman** / **Swagger** for API testing and documentation
+- Java 17+  
+- Spring Boot  
+- Spring Cloud  
+- Spring Security + JWT  
+- Eureka Discovery Server  
+- Spring Cloud Gateway  
+- Maven  
+- Postman (or Swagger) for API testing  
+- Docker + Docker Compose  
 
+---
 
 ## ⚙️ Services Overview
 
-| Service         | Port | Description                        |
-|-----------------|------|------------------------------------|
-| Eureka Registry | 8761 | Service Discovery Server           |
-| Auth Service    | 8081 | Login / Register APIs              |
-| User Service    | 8082 | User APIs (secured with JWT)       |
-| API Gateway     | 8080 | Routes requests + Security Layer   |
+| Service           | Port | Description                      |
+|-------------------|------|----------------------------------|
+| Eureka Registry   | 8761 | Service Discovery Server         |
+| Auth Service      | 8081 | Handles login & registration     |
+| User Service      | 8082 | JWT-secured user endpoints       |
+| API Gateway       | 8080 | Routes & secures all API traffic |
 
+---
 
+## 🔐 Authentication Flow
 
-🔐 Authentication Flow
+1. User logs in via `/auth/api/v1/auth/login`  
+2. A JWT token is returned upon successful login  
+3. Client sends the token in the `Authorization: Bearer <token>` header  
+4. API Gateway validates the token and routes the request to internal services  
+5. Secured services process only if the token is valid  
 
-User logs in via /auth/login.
+---
 
-JWT token is returned.
+## 🐳 Docker Deployment
 
-Token is sent in Authorization: Bearer <token> header for all secured requests.
+All services are containerized and deployed using Docker Compose.
 
-Gateway filters and verifies token before routing
-## 📬 API Documentation
+### 📦 Docker Hub
 
-- 👉 [Admin Login](https://documenter.getpostman.com/view/33677881/2sB2x2JZBM)
-- 👉 [Register Admin](https://documenter.getpostman.com/view/33677881/2sB2x2JZBP)
+✅ Docker images are available on Docker Hub:  
+👉 `https://hub.docker.com/repositories/ayush4857`  
 
+📬 API Documentation
+👉👉 [View Full Postman API Docs](https://documenter.getpostman.com/view/33677881/2sB34cnhJa)
+
+✅ Usage Summary
+Register/Login using auth-service via API Gateway
+
+Get a JWT token
+
+Call protected routes in user-service using the token
+
+All communication flows through api-gateway
+
+Eureka handles service discovery
