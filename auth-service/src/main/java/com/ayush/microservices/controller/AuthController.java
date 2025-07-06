@@ -11,6 +11,7 @@ import com.ayush.microservices.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -35,7 +36,7 @@ public class AuthController {
         this.userRepository = userRepository;
     }
 
-    @PostMapping("/register")
+    @PostMapping("/register/user")
     public ResponseEntity<APIResponse<String>> register(@RequestBody UserDto dto) {
        // dto.setRole("ROLE_ADMIN");
 
@@ -43,6 +44,15 @@ public class AuthController {
         APIResponse<String> response = authService.register(dto);
         return new ResponseEntity<>(response, HttpStatusCode.valueOf(response.getStatus()));
     }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/register/admin")
+    public ResponseEntity<APIResponse<String>> registerAdmin(@RequestBody UserDto dto) {
+        dto.setRole("ROLE_ADMIN");
+        APIResponse<String> response = authService.register(dto);
+        return new ResponseEntity<>(response, HttpStatusCode.valueOf(response.getStatus()));
+    }
+
 
     @PutMapping("/update-password")
     public ResponseEntity<APIResponse<String>> updatePassword(@RequestBody UpdatePasswordDto updatePasswordDto){
