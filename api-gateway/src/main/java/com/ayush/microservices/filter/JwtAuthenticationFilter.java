@@ -78,9 +78,17 @@ public class JwtAuthenticationFilter implements GlobalFilter, Ordered {
         return chain.filter(exchange);
     }
 
-    private boolean isPublicEndpoint(String path) {
-        return openApiEndpoints.stream().anyMatch(path::equalsIgnoreCase);
+ private boolean isPublicEndpoint(String path) {
+    // Loop through each public endpoint path
+    for (String publicPath : openApiEndpoints) {
+        // Check if the requested path matches (case-insensitive)
+        if (publicPath.equalsIgnoreCase(path)) {
+            return true; // It's a public endpoint, so allow it
+        }
     }
+    return false; // Not a public endpoint, must check JWT
+}
+
 
     private boolean isAuthorized(String path, String role) {
         for (Map.Entry<String, List<String>> entry : protectedEndpointsWithRoles.entrySet()) {
