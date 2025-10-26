@@ -1,10 +1,6 @@
 # 🛡️ Microservice Spring Security Project
 
-This project demonstrates a **Spring Boot Microservices Architecture** with **Spring Security**, **JWT Authentication**, **Eureka Service Registry**, and an **API Gateway**.  
-All services are containerized using Docker and orchestrated with Docker Compose.
-
----
----
+This project demonstrates a **Spring Boot Microservices Architecture** with **Spring Security**, **JWT Authentication**, **Eureka Service Registry**, and an **API Gateway**. All services are containerized using Docker and orchestrated with Docker Compose.
 
 ## 🌐 Live Demo
 
@@ -65,24 +61,13 @@ All services are containerized using Docker and orchestrated with Docker Compose
 
 All services are containerized and deployed using Docker Compose.
 
-### 📦 Docker Hub
+---
+## 🧩 Summary
 
-✅ Docker images are available on Docker Hub:  
-👉 [View Docker Hub Repositories](https://hub.docker.com/repositories/ayush4857)
+This project demonstrates a **production-ready microservice system** using:
+- Spring Boot + JWT for secure authentication  
+- Spring Cloud for service discovery and routing  
+- Docker for microservice orchestration  
+- Netlify + AWS EC2 for full-stack deployment  
 
-
-📬 API Documentation
-
-👉 [View Full Postman API Docs](https://documenter.getpostman.com/view/33677881/2sB34cnhJa)
-
-
-✅ Usage Summary
-Register/Login using auth-service via API Gateway
-
-Get a JWT token
-
-Call protected routes in user-service using the token
-
-All communication flows through api-gateway
-
-Eureka handles service discovery
+💻 **Designed, implemented, and deployed by [Ayush Guragain](https://github.com/2023ayush)**
