@@ -4,6 +4,16 @@ This project demonstrates a **Spring Boot Microservices Architecture** with **Sp
 All services are containerized using Docker and orchestrated with Docker Compose.
 
 ---
+---
+
+## 🌐 Live Demo
+
+- **Frontend (Netlify):** [View Live](https://sprightly-toffee-322be7.netlify.app/login)
+- **API Documentation (Postman):** [View on Postman](https://documenter.getpostman.com/view/33677881/2sB34cnhJa)
+- **Docker Hub:** [ayush4857](https://hub.docker.com/repositories/ayush4857)
+
+> 🕐 Backend hosted on AWS EC2 — may take a few seconds to start when idle.
+
 
 ## 🏗️ Project Structure
 
