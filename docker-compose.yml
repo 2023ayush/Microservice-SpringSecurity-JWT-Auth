@@ -1,23 +1,13 @@
-version: '3'
 services:
   service-registry:
-    image: ayush4857/service-registry
+    image: ayush4857/service-registry:latest
     ports:
       - "8761:8761"
     networks:
       - app-network
 
-  api-gateway:
-    image: ayush4857/api-gateway
-    ports:
-      - "5555:5555"
-    depends_on:
-      - service-registry
-    networks:
-      - app-network
-
   auth-service:
-    image: ayush4857/auth-service
+    image: ayush4857/auth-service:latest
     ports:
       - "1122:1122"
     depends_on:
@@ -26,9 +16,18 @@ services:
       - app-network
 
   user-service:
-    image: ayush4857/user-service
+    image: ayush4857/user-service:latest
     ports:
       - "8081:8081"
+    depends_on:
+      - service-registry
+    networks:
+      - app-network
+
+  api-gateway:
+    image: ayush4857/api-gateway:latest
+    ports:
+      - "5555:5555"
     depends_on:
       - service-registry
     networks:
