@@ -10,7 +10,7 @@ This project demonstrates a **Spring Boot Microservices Architecture** with **Sp
 
 > 🕐 Backend hosted on AWS EC2 — may take a few seconds to start when idle.
 
-Best Practices Implemented
+## Best Practices Implemented
 
 ✅ Global Exception Handling – centralized error handling for all services using @RestControllerAdvice.
 
