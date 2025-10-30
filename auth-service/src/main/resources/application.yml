@@ -19,7 +19,7 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://service-registry:8761/eureka  # <-- changed from localhost
+      defaultZone: http://service-registry:8761/eureka
 
   instance:
     prefer-ip-address: true
@@ -32,3 +32,12 @@ management:
   endpoint:
     health:
       show-details: always
+
+logging:
+  level:
+    root: INFO
+    com.ayush.microservices: INFO
+    com.ayush.microservices.controller: INFO
+    com.ayush.microservices.service: INFO
+    com.ayush.microservices.exception: WARN
+    org.springframework.security: WARN
