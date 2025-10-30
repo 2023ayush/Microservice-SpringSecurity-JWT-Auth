@@ -10,6 +10,20 @@ This project demonstrates a **Spring Boot Microservices Architecture** with **Sp
 
 > 🕐 Backend hosted on AWS EC2 — may take a few seconds to start when idle.
 
+Best Practices Implemented
+
+✅ Global Exception Handling – centralized error handling for all services using @RestControllerAdvice.
+
+✅ DTO Validation – input validated with @Valid and custom constraints for safer requests.
+
+✅ Logging – SLF4J/Logback logging implemented in controllers and services for easier debugging and monitoring.
+
+✅ Containerization – all microservices containerized with Docker and orchestrated via Docker Compose.
+
+✅ Security – JWT authentication with role-based access control.
+
+✅ Microservice Architecture – separated services with Eureka service discovery and API Gateway routing.
+
 
 ## 🏗️ Project Structure
 
