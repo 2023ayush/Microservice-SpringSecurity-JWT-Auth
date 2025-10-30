@@ -17,6 +17,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/v1/auth/")
 public class AuthController {
@@ -36,18 +38,17 @@ public class AuthController {
         this.userRepository = userRepository;
     }
 
+
     @PostMapping("/register/user")
-    public ResponseEntity<APIResponse<String>> register(@RequestBody UserDto dto) {
-       // dto.setRole("ROLE_ADMIN");
-
-
+    public ResponseEntity<APIResponse<String>> register(@Valid @RequestBody UserDto dto) {
         APIResponse<String> response = authService.register(dto);
         return new ResponseEntity<>(response, HttpStatusCode.valueOf(response.getStatus()));
     }
 
+
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/register/admin")
-    public ResponseEntity<APIResponse<String>> registerAdmin(@RequestBody UserDto dto) {
+    public ResponseEntity<APIResponse<String>> registerAdmin(@Valid @RequestBody UserDto dto) {
         dto.setRole("ROLE_ADMIN");
         APIResponse<String> response = authService.register(dto);
         return new ResponseEntity<>(response, HttpStatusCode.valueOf(response.getStatus()));
@@ -55,15 +56,14 @@ public class AuthController {
 
 
     @PutMapping("/update-password")
-    public ResponseEntity<APIResponse<String>> updatePassword(@RequestBody UpdatePasswordDto updatePasswordDto){
+    public ResponseEntity<APIResponse<String>> updatePassword(@Valid @RequestBody UpdatePasswordDto updatePasswordDto) {
         APIResponse<String> response = authService.setNewPassword(updatePasswordDto);
         return new ResponseEntity<>(response, HttpStatusCode.valueOf(response.getStatus()));
     }
 
 
     @PostMapping("/login")
-    public ResponseEntity<APIResponse<String>> loginCheck(@RequestBody LoginDto loginDto){
-
+    public ResponseEntity<APIResponse<String>> loginCheck(@Valid @RequestBody LoginDto loginDto) {
         APIResponse<String> response = new APIResponse<>();
 
         UsernamePasswordAuthenticationToken token =
@@ -73,8 +73,10 @@ public class AuthController {
             Authentication authenticate = authManager.authenticate(token);
 
             if(authenticate.isAuthenticated()) {
-                String jwtToken = jwtService.generateToken(loginDto.getUsername(),
-                        authenticate.getAuthorities().iterator().next().getAuthority());
+                String jwtToken = jwtService.generateToken(
+                        loginDto.getUsername(),
+                        authenticate.getAuthorities().iterator().next().getAuthority()
+                );
 
                 response.setMessage("Login Successful");
                 response.setStatus(200);

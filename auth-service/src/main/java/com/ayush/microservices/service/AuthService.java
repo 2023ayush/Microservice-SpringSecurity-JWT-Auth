@@ -4,6 +4,8 @@ import com.ayush.microservices.dto.APIResponse;
 import com.ayush.microservices.dto.UpdatePasswordDto;
 import com.ayush.microservices.dto.UserDto;
 import com.ayush.microservices.entity.User;
+import com.ayush.microservices.exception.CustomException;
+import com.ayush.microservices.exception.ResourceNotFoundException;
 import com.ayush.microservices.repository.UserRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,22 +22,15 @@ public class AuthService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-
+    // ✅ Registration Logic with Exception Handling
     public APIResponse<String> register(UserDto dto) {
 
-        if(userRepository.existsByUsername(dto.getUsername())) {
-            APIResponse<String> response = new APIResponse<>();
-            response.setMessage("Registration Failed");
-            response.setStatus(500);
-            response.setData("User with username exists");
-            return response;
+        if (userRepository.existsByUsername(dto.getUsername())) {
+            throw new CustomException("User with username '" + dto.getUsername() + "' already exists.");
         }
-        if(userRepository.existsByEmail(dto.getEmail())) {
-            APIResponse<String> response = new APIResponse<>();
-            response.setMessage("Registration Failed");
-            response.setStatus(500);
-            response.setData("User with Email Id exists");
-            return response;
+
+        if (userRepository.existsByEmail(dto.getEmail())) {
+            throw new CustomException("User with email '" + dto.getEmail() + "' already exists.");
         }
 
         User user = new User();
@@ -43,56 +38,43 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
 
         userRepository.save(user);
-        // ✅ Make message dynamic based on role
-        String role = dto.getRole();
-        String roleMessage = "User is registered";
 
+        String role = dto.getRole();
+        String roleMessage = "User is registered successfully";
         if ("ROLE_ADMIN".equalsIgnoreCase(role)) {
-            roleMessage = "Admin is registered";
+            roleMessage = "Admin is registered successfully";
         }
 
         APIResponse<String> response = new APIResponse<>();
-        response.setMessage("Registration Done");
         response.setStatus(201);
+        response.setMessage("Registration Successful");
         response.setData(roleMessage);
-
         return response;
-
-
     }
 
-
+    // ✅ Password Update Logic with Exception Handling
     public APIResponse<String> setNewPassword(UpdatePasswordDto updatePasswordDto) {
-        if(!userRepository.existsByUsername(updatePasswordDto.getUsername())) {
-            APIResponse<String> response = new APIResponse<>();
-            response.setMessage("Failed");
-            response.setStatus(500);
-            response.setData("User with username doesnot exists");
-            return response;
-        }
-        if(!userRepository.existsByEmail(updatePasswordDto.getEmail())) {
-            APIResponse<String> response = new APIResponse<>();
-            response.setMessage("Failed");
-            response.setStatus(500);
-            response.setData("User with Email Id does not exists");
-            return response;
-        }
 
         User user = userRepository.findByEmail(updatePasswordDto.getEmail());
-
-        if(BCrypt.checkpw(updatePasswordDto.getOldPassword(), user.getPassword())) {
-            user.setPassword(updatePasswordDto.getNewPassword());
-            userRepository.save(user);
-            APIResponse<String> response = new APIResponse<>();
-            response.setMessage("Done");
-            response.setStatus(200);
-            response.setData("User password is updated");
-            return response;
+        if (user == null) {
+            throw new ResourceNotFoundException("User not found with email: " + updatePasswordDto.getEmail());
         }
 
-        return null;
+        if (!userRepository.existsByUsername(updatePasswordDto.getUsername())) {
+            throw new ResourceNotFoundException("User not found with username: " + updatePasswordDto.getUsername());
+        }
 
+        if (!BCrypt.checkpw(updatePasswordDto.getOldPassword(), user.getPassword())) {
+            throw new CustomException("Old password is incorrect. Please try again.");
+        }
 
+        user.setPassword(passwordEncoder.encode(updatePasswordDto.getNewPassword()));
+        userRepository.save(user);
+
+        APIResponse<String> response = new APIResponse<>();
+        response.setStatus(200);
+        response.setMessage("Password updated successfully");
+        response.setData("Password change completed for user: " + user.getUsername());
+        return response;
     }
-
 }
