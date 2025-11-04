@@ -3,31 +3,23 @@ spring:
     name: api-gateway
 
   cloud:
-    gateway:
-      routes:
-        - id: auth-service-app
-          uri: lb://AUTHSERVICEAPP
-          predicates:
-            - Path=/auth/**
-          filters:
-            - RewritePath=/auth/(?<segment>.*), /${segment}
+    config:
+      uri: http://localhost:8888
 
-        - id: userservice-api-1
-          uri: lb://USER-SERVICE
-          predicates:
-            - Path=/micro1/**
-          filters:
-            - RewritePath=/micro1/(?<segment>.*), /${segment}
+  config:
+    import: "configserver:"
 
-server:
-  port: 5555
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'   # this exposes all actuator endpoints
+  endpoint:
+    health:
+      show-details: always   # optional, shows detailed health info
 
-eureka:
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://service-registry:8761/eureka  # <-- change here
 
-  instance:
-    prefer-ip-address: true
+logging:
+  level:
+    org.springframework.cloud.config.server: DEBUG
+    org.eclipse.jgit: DEBUG

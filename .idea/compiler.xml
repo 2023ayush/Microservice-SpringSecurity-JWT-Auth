@@ -8,8 +8,9 @@
         <outputRelativeToContentRoot value="true" />
         <module name="api-gateway" />
         <module name="service-registry" />
+        <module name="config_server" />
       </profile>
-      <profile name="Annotation profile for Hotel Microservices" enabled="true">
+      <profile name="Annotation profile for microservices-spring-security-with-jwt" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -23,10 +24,11 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="api-gateway" options="-parameters" />
-      <module name="auth-service" options="-parameters" />
-      <module name="service-registry" options="-parameters" />
-      <module name="user-service" options="-parameters" />
+      <module name="api-gateway" options="" />
+      <module name="auth-service" options="" />
+      <module name="config_server" options="" />
+      <module name="service-registry" options="" />
+      <module name="user-service" options="" />
     </option>
   </component>
 </project>

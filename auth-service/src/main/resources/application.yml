@@ -2,42 +2,23 @@ spring:
   application:
     name: AUTHSERVICEAPP
 
-  datasource:
-    url: jdbc:mysql://localhost:3306/microservicedb
-    username: root
-    password: test
+  cloud:
+    config:
+      uri: http://localhost:8888
 
-  jpa:
-    hibernate:
-      ddl-auto: update
-
-server:
-  port: 1122
-
-eureka:
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://service-registry:8761/eureka
-
-  instance:
-    prefer-ip-address: true
+  config:
+    import: "configserver:"
 
 management:
   endpoints:
     web:
       exposure:
-        include: health,info
+        include: '*'   # this exposes all actuator endpoints
   endpoint:
     health:
-      show-details: always
+      show-details: always   # optional, shows detailed health info
 
 logging:
   level:
-    root: INFO
-    com.ayush.microservices: INFO
-    com.ayush.microservices.controller: INFO
-    com.ayush.microservices.service: INFO
-    com.ayush.microservices.exception: WARN
-    org.springframework.security: WARN
+    org.springframework.cloud.config.server: DEBUG
+    org.eclipse.jgit: DEBUG

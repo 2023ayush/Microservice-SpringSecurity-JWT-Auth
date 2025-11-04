@@ -2,18 +2,24 @@ spring:
   application:
     name: user-service
 
-server:
-  port: 8081
+  cloud:
+    config:
+      uri: http://localhost:8888
 
-eureka:
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://service-registry:8761/eureka  # <-- changed from localhost
+  config:
+    import: "configserver:"
 
 management:
   endpoints:
     web:
       exposure:
-        include: health,info
+        include: '*'   # this exposes all actuator endpoints
+  endpoint:
+    health:
+      show-details: always   # optional, shows detailed health info
+
+logging:
+  level:
+    org.springframework.cloud.config.server: DEBUG
+    org.eclipse.jgit: DEBUG
+

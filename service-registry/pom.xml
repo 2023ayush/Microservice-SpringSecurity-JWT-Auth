@@ -1,26 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+	<!-- Parent: Root POM -->
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.5.0</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<groupId>com.ayush.microservices</groupId>
+		<artifactId>microservices-spring-security-with-jwt</artifactId>
+		<version>1.0.0</version>
+		<relativePath>../pom.xml</relativePath> <!-- adjust path if needed -->
 	</parent>
 
 	<groupId>com.ayush.microservices</groupId>
 	<artifactId>service-registry</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>service-registry</name>
-	<description>Demo project for Spring Boot with Microservices</description>
-
-	<properties>
-		<java.version>17</java.version>
-		<spring-cloud.version>2025.0.0</spring-cloud.version>
-	</properties>
+	<description>Service Registry (Eureka Server) for Microservices</description>
 
 	<dependencies>
 		<!-- Web dependency -->
@@ -35,13 +32,6 @@
 			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
 		</dependency>
 
-		<!-- JWT Auth0 -->
-		<dependency>
-			<groupId>com.auth0</groupId>
-			<artifactId>java-jwt</artifactId>
-			<version>4.4.0</version>
-		</dependency>
-
 		<!-- Devtools for Hot Reload -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -50,6 +40,12 @@
 			<optional>true</optional>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
+
+
 		<!-- Test Dependencies -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -57,18 +53,6 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>${spring-cloud.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 
 	<build>
 		<finalName>service-registry</finalName>
