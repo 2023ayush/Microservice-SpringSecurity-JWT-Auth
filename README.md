@@ -8,21 +8,26 @@ This project demonstrates a **Spring Boot Microservices Architecture** with **Sp
 - **API Documentation (Postman):** [View on Postman](https://documenter.getpostman.com/view/33677881/2sB34cnhJa)
 - **Docker Hub:** [ayush4857](https://hub.docker.com/repositories/ayush4857)
 
-> 🕐 Backend hosted on AWS EC2 — may take a few seconds to start when idle.
+> 🕐 Backend can be hosted on AWS EC2 — may take a few seconds to start when idle. Currently, it's running locally, but deployment is possible when needed.
 
 ## Best Practices Implemented
 
-✅ Global Exception Handling – centralized error handling for all services using @RestControllerAdvice.
+✅ **Global Exception Handling** – centralized error handling for all services using `@RestControllerAdvice`.  
 
-✅ DTO Validation – input validated with @Valid and custom constraints for safer requests.
+✅ **DTO Validation** – input validated with `@Valid` and custom constraints for safer requests.  
 
-✅ Logging – SLF4J/Logback logging implemented in controllers and services for easier debugging and monitoring.
+✅ **Logging** – SLF4J/Logback logging implemented in controllers and services for easier debugging and monitoring.  
 
-✅ Containerization – all microservices containerized with Docker and orchestrated via Docker Compose.
+✅ **Containerization** – all microservices containerized with Docker and orchestrated via Docker Compose.  
 
-✅ Security – JWT authentication with role-based access control.
+✅ **Security** – JWT authentication with role-based access control.  
 
-✅ Microservice Architecture – separated services with Eureka service discovery and API Gateway routing.
+✅ **Microservice Architecture** – separated services with Eureka service discovery and API Gateway routing.  
+
+✅ **Centralized Configuration** – configuration for all microservices managed via **Spring Cloud Config Server**.  
+
+✅ **Actuator Endpoints Exposed** – `/actuator` endpoints available for health, metrics, and monitoring.  
+
 
 
 ## 🏗️ Project Structure
